@@ -13,6 +13,8 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
 
+app.use("/api/doctors", doctorRoutes);
+app.use("/api/patients", patientRoutes);
 
 app.get('/', (req, res) => {
     // send some text back as a response
