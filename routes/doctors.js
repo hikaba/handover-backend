@@ -17,3 +17,20 @@ router.get("/", async (req, res) => {
     }
 });
 export default router;
+
+//Get all patients for a given doctor
+router.get("/:doctorId/patients", async (req, res) => {
+    const { doctorId } = req.params;
+    try {
+        const patients = await knex('patients')
+        .join('doctor_patient', 'patients.id', '=', 'doctor_patient.patient_id')
+        .where('doctor_patient.doctor_id', doctorId)
+        .select('patients.*')
+        .orderBy('patients.last_name', 'asc');
+
+        res.status(200).json(patients);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message : `${error}`});
+    }
+});
