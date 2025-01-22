@@ -40,7 +40,42 @@ export async function seed(knex) {
       last_name: 'Moore', 
       date_of_birth: '1983-09-15', 
       medical_history: JSON.stringify({ allergies: ['dust'], past_surgeries: [] }) 
+    },
+    { 
+      id: 6,
+      first_name: 'Olivia', 
+      last_name: 'Johnson', 
+      date_of_birth: '1988-04-10', 
+      medical_history: JSON.stringify({ allergies: ['shellfish'], past_surgeries: ['tonsillectomy'] }) 
+    },
+    { 
+      id: 7,
+      first_name: 'James', 
+      last_name: 'Brown', 
+      date_of_birth: '1975-07-25', 
+      medical_history: JSON.stringify({ allergies: ['pollen'], past_surgeries: ['hernia repair'] }) 
+    },
+    { 
+      id: 8,
+      first_name: 'Sophia', 
+      last_name: 'Garcia', 
+      date_of_birth: '1995-10-05', 
+      medical_history: JSON.stringify({ allergies: [], past_surgeries: [] }) 
+    },
+    { 
+      id: 9,
+      first_name: 'William', 
+      last_name: 'Martinez', 
+      date_of_birth: '1982-08-19', 
+      medical_history: JSON.stringify({ allergies: ['nuts'], past_surgeries: ['hip replacement'] }) 
+    },
+    { 
+      id: 10,
+      first_name: 'Isabella', 
+      last_name: 'Lee', 
+      date_of_birth: '1991-12-03', 
+      medical_history: JSON.stringify({ allergies: ['latex'], past_surgeries: ['c-section'] }) 
     }
   ]);
-
 };
+
