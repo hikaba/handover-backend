@@ -4,7 +4,7 @@
  */
 export function up(knex) {
     return knex.schema.createTable('patients', (table) => {
-        table.uuid('id').primary().defaultTo(knex.raw('uuid()'));
+        table.increments('id').primary();
         table.string('first_name').notNullable();
         table.string('last_name').notNullable();
         table.string('date_of_birth').notNullable();
@@ -19,5 +19,5 @@ export function up(knex) {
    * @returns { Promise<void> }
    */
   export function down(knex) {
-    return knex.schema.dropTable('patients');
+    return knex.schema.dropTableIfExists('patients');
   };

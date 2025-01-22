@@ -4,13 +4,12 @@
  */
 export function up(knex) {
     return knex.schema.createTable('doctors', (table) => {
-        table.uuid('id').primary().defaultTo(knex.raw('uuid()'));
+        table.string('id').primary(); // Firebase UID as primary key
         table.string('first_name').notNullable();
         table.string('last_name').notNullable();
-        table.string('email').notNullable.unique();
+        table.string('email').notNullable().unique();
         table.string('phone').notNullable();
-        table.string('specialization').notNullable();
-        table.string('current_block');
+        table.string('current_block').notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
     });
@@ -21,6 +20,6 @@ export function up(knex) {
    * @returns { Promise<void> }
    */
   export function down(knex) {
-    return knex.schema.dropTable('doctors');
+    return knex.schema.dropTableIfExists('doctors');
   };
   
