@@ -71,4 +71,18 @@ router.post("/", async (req, res) =>{
     }
 });
 
+//getting the handover note given patient id
+router.get("/id/handover", async(req, res) => {
+    const { id } = req.params;
+    try{
+        const patient = await knex("patients").where({id}).first();
+        if(!patient) {
+            return res.status(404).json({message: "patient not found"});
+        }
+        res.status(200).json(patient.handover_note);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "error retrieving handover note"});
+    }
+});
 export default router;
