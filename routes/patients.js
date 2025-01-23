@@ -26,16 +26,16 @@ const validatePatient = (data) => {
     return { valid: true };
 }
 
-//Get all patients
-router.get("/", async (req, res) => {
-    try {
-        const patients = await knex("patients");
-        res.status(200).json(patients);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "An error occurred while retrieving patients." });
-    }
-});
+// //Get all patients
+// router.get("/", async (req, res) => {
+//     try {
+//         const patients = await knex("patients");
+//         res.status(200).json(patients);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: "An error occurred while retrieving patients." });
+//     }
+// });
 
 //adding a new patient
 router.post("/", async (req, res) =>{
@@ -104,7 +104,7 @@ router.put("/:id/handover", async(req, res) => {
             .where({ id })
             .select("handover_note")
             .first();
-            
+
         res.status(200).json(updatedHandoverNote);
     } catch (error) {
         console.error(error);
@@ -128,6 +128,24 @@ router.get("/:id", async(req, res) => {
         res.status(500).json({message: "error retrieving this patient"});
     }
 });
+
+//getting all patients by their current block
+router.get("/", async(req, res) => {
+    const { block } = req.query;
+
+    try {
+        let patients = await knex("patients").where({ current_block: block });
+
+        if(!block) {
+            let patients = await knex("patients");
+        }
+
+        res.status(200).json(patients);
+    } catch (error) {
+        console.error(error);
+            res.status(500).json({ message: "error retrieving patients for block"})
+ }
+})
 
 
 export default router;
