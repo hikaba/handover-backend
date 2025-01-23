@@ -102,7 +102,24 @@ router.put("/:id/handover", async(req, res) => {
         console.error(error);
         res.status(500).json({message: "error updating handover note"});
     }
-})
+});
+
+//getting patient given their id
+router.get("/:id", async(req, res) => {
+    const { id } = req.params;
+
+    try {
+        const patient = await knex("patients").where({ id }).first();
+
+        if(!patient) {
+            return res.status(400).json({message: `patient with ID: ${id} not found`});
+        }
+        res.status(200).json(patient);
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({message: "error retrieving this patient"});
+    }
+});
 
 
 export default router;
