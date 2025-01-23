@@ -72,7 +72,7 @@ router.post("/", async (req, res) =>{
 });
 
 //getting the handover note given patient id
-router.get("/id/handover", async(req, res) => {
+router.get("/:id/handover", async(req, res) => {
     const { id } = req.params;
     try{
         const patient = await knex("patients").where({id}).first();
@@ -85,4 +85,24 @@ router.get("/id/handover", async(req, res) => {
         res.status(500).json({message: "error retrieving handover note"});
     }
 });
+
+//updating handover note given patient id
+router.put("/:id/handover", async(req, res) => {
+    const { id } = req.params;
+    const { handover_note } = req.body;
+    try{
+        const updated = await knex("patients")
+        .where({id})
+        .update({handover_note}, ["handover_note"]);
+        if(!updated) {
+            return res.status(404).json({message: "patient not found"});
+        }
+        res.status(200).json(updated);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "error updating handover note"});
+    }
+})
+
+
 export default router;
