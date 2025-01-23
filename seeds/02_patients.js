@@ -15,7 +15,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Hypertension'], 
         tasks: ['Monitor blood pressure daily', 'Adjust antihypertensive medication if needed'] 
-      })
+      }),
+      current_block: 'Cardiology' // Added current_block
     },
     { 
       id: 2,
@@ -26,7 +27,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Post-MI care'], 
         tasks: ['Monitor troponin levels', 'Schedule follow-up echocardiogram'] 
-      })
+      }),
+      current_block: 'ICU' // Added current_block
     },
     { 
       id: 3,
@@ -37,7 +39,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Atrial fibrillation'], 
         tasks: ['Ensure anticoagulation therapy adherence', 'Monitor heart rate'] 
-      })
+      }),
+      current_block: 'Nephrology' // Added current_block
     },
     { 
       id: 4,
@@ -48,7 +51,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Congestive heart failure'], 
         tasks: ['Monitor fluid intake/output', 'Adjust diuretics as needed'] 
-      })
+      }),
+      current_block: 'Respirology' // Added current_block
     },
     { 
       id: 5,
@@ -59,7 +63,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Stable angina'], 
         tasks: ['Ensure patient takes nitrates for chest pain', 'Schedule a stress test'] 
-      })
+      }),
+      current_block: 'Gastroenterology' // Added current_block
     },
     { 
       id: 6,
@@ -70,7 +75,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Pericarditis'], 
         tasks: ['Administer anti-inflammatory medication', 'Monitor for signs of cardiac tamponade'] 
-      })
+      }),
+      current_block: 'Cardiology' // Added current_block
     },
     { 
       id: 7,
@@ -81,7 +87,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Mitral valve regurgitation'], 
         tasks: ['Monitor for worsening symptoms', 'Schedule a follow-up echocardiogram'] 
-      })
+      }),
+      current_block: 'ICU' // Added current_block
     },
     { 
       id: 8,
@@ -92,7 +99,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Tachycardia'], 
         tasks: ['Assess potential triggers', 'Administer beta-blockers as needed'] 
-      })
+      }),
+      current_block: 'Gastroenterology' // Added current_block
     },
     { 
       id: 9,
@@ -103,7 +111,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Post-stent placement'], 
         tasks: ['Monitor for signs of restenosis', 'Ensure dual antiplatelet therapy adherence'] 
-      })
+      }),
+      current_block: 'Nephrology' // Added current_block
     },
     { 
       id: 10,
@@ -114,7 +123,8 @@ export async function seed(knex) {
       handover_note: JSON.stringify({ 
         active_issues: ['Bradycardia'], 
         tasks: ['Evaluate for potential pacemaker', 'Monitor for syncope'] 
-      })
+      }),
+      current_block: 'Respirology' // Added current_block
     }
   ]);
 };
