@@ -91,13 +91,21 @@ router.put("/:id/handover", async(req, res) => {
     const { id } = req.params;
     const { handover_note } = req.body;
     try{
-        const updated = await knex("patients")
+        const handover = await knex("patients")
         .where({id})
-        .update({handover_note}, ["handover_note"]);
-        if(!updated) {
+        .update({ handover_note: JSON.stringify(handover_note) });
+
+        if(!handover) {
             return res.status(404).json({message: "patient not found"});
         }
-        res.status(200).json(updated);
+
+        //get updated handover
+        const updatedHandoverNote = await knex("patients")
+            .where({ id })
+            .select("handover_note")
+            .first();
+            
+        res.status(200).json(updatedHandoverNote);
     } catch (error) {
         console.error(error);
         res.status(500).json({message: "error updating handover note"});
