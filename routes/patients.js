@@ -7,16 +7,18 @@ const knex = initKnex(knexfile);
 
 //helper function for validation, returns strcuture with {valid: bool, ?message:}
 const validatePatient = (data) => {
+    if (!data) {
+        return { valid: false, message: "No patient data provided." };
+    }
     const {
-        id,
         first_name,
         last_name,
-        data_of_birth,
+        date_of_birth,
         medical_history
     } = data;
     
     //check for missing fields
-    if (!first_name || !last_name || !data_of_birth){
+    if (!first_name || !last_name || !date_of_birth){
         return {
             valid: false, message: "first name, last name, and DOB are required."
         }
@@ -34,11 +36,10 @@ router.get("/", async (req, res) => {
         res.status(500).json({ message: "An error occurred while retrieving patients." });
     }
 });
-export default router;
 
 //adding a new patient
 router.post("/", async (req, res) =>{
-    const {patientData, doctorId }= req.body;
+    const {patientData, doctor_id }= req.body;
 
     //validate request body
     const validation = validatePatient(patientData);
@@ -53,7 +54,7 @@ router.post("/", async (req, res) =>{
 
             // insert into doctor_patient table
             await trx("doctor_patient").insert({
-                doctor_id: doctorId,
+                doctor_id: doctor_id,
                 patient_id: newPatientId
             });
 
@@ -69,3 +70,5 @@ router.post("/", async (req, res) =>{
 
     }
 });
+
+export default router;
